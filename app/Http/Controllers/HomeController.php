@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Message;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -9,6 +10,10 @@ class HomeController extends Controller
     // index
     public function index()
     {
-        return view('home');
+        $data = [
+            'messages' => Message::with('comments')->get()
+        ];
+
+        return view('home', $data);
     }
 }
