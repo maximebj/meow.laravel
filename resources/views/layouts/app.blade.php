@@ -14,23 +14,30 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            @include('layouts.navigation')
+    <body class="min-h-screen bg-gray-900 font-sans antialiased">
+       
+        <header class="p-4 bg-gray-800 text-white">
+            <div class="max-w-4xl flex items-center justify-between m-auto">
+              <h1 class="text-xl font-semibold">Meow 😻</h1>
 
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white dark:bg-gray-800 shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif
+              @auth
+                <form method="POST" action="{{ route('logout') }}">
+                  @csrf
 
-            <!-- Page Content -->
-            <main class="my-8 max-w-4xl m-auto">
-                {{ $slot }}
-            </main>
-        </div>
+                  <a href="route('logout')" onclick="event.preventDefault();this.closest('form').submit();">
+                    Logout
+                  </a>
+                </form>
+              @endauth
+
+              @guest
+                <a href="{{ route('login') }}">Login</a>
+              @endguest
+            </div>
+        </header>
+
+        <main class="my-8 max-w-4xl m-auto">
+            {{ $slot }}
+        </main>
     </body>
 </html>
