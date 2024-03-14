@@ -28,7 +28,7 @@
             @endif
 
             <!-- Page Content -->
-            <main>
+            <main class="my-8 max-w-4xl m-auto">
                 {{ $slot }}
             </main>
         </div>

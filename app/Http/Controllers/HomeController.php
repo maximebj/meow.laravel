@@ -11,7 +11,7 @@ class HomeController extends Controller
     public function index()
     {
         $data = [
-            'messages' => Message::with('comments')->get()
+            'messages' => Message::with('comments', 'user')->get()
         ];
 
         return view('home', $data);

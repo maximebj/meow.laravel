@@ -28,16 +28,21 @@ class MessagesController extends Controller
      */
     public function store(Request $request)
     {
+        # Je vérifie la validité des champs du formulaire
         $request->validate([
             'content' => 'required|max:300',
         ]);
 
+        # Je créé un nouveau message
         $message = new Message();
         $message->content = $request->content;
-        $message->user_id = auth()->id();
+        $message->user_id = auth()->id(); # En assignant l'id de l'utilisateur connecté
 
+        # J'enregistre le message en BDD
         $message->save();
-        return redirect()->route('index');
+
+        # Je redirige vers l'accueil
+        return redirect()->route('index')->with('success', 'Nouveau message publié !');
     }
 
     /**
