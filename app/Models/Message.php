@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Comments extends Model
+class Message extends Model
 {
     use HasFactory;
     use HasUuids;
@@ -20,10 +20,10 @@ class Comments extends Model
     protected $fillable = ['content'];
 
     /**
-     * Get the post that owns the comment.
+     * Get the comments for the message.
      */
-    public function message(): BelongsTo
+    public function comments(): HasMany
     {
-        return $this->belongsTo(Messages::class);
+        return $this->hasMany(Comment::class);
     }
 }
